@@ -33,8 +33,14 @@
 #include "usbdrv/usbdrv.h"
 
 // local includes
-#include "../uDMX_cmds.h"		// USB command and error constants
+#include "../common/uDMX_cmds.h"		// USB command and error constants
+#include "udmx.h"
 
+
+typedef unsigned char  u08;
+typedef   signed char  s08;
+typedef unsigned short u16;
+typedef   signed short s16;
 
 // ==============================================================================
 // Constants
@@ -43,50 +49,7 @@
 // device serial number, formatted as YearMonthDayNCounter
 PROGMEM int usbDescriptorStringSerialNumber[] = {USB_STRING_DESCRIPTOR_HEADER(11),'1','0','0','2','0','9','N','0','0','4','3'};
 
-#define NUM_CHANNELS 512		// number of channels in DMX-512
 
-// values for dmx_state
-#define dmx_Off 0
-#define dmx_NewPacket 1	
-#define dmx_InPacket 2
-#define dmx_EndOfPacket 3
-#define dmx_InBreak 4
-#define dmx_InMAB 5
-
-// values for usb_state
-#define usb_NotInitialized 0
-#define usb_Idle 1
-#define usb_ChannelRange 2
-
-
-// PORTB States for leds
-#define LED_YELLOW 0x10
-#define LED_GREEN 0x1
-#define LED_BOTH 0x0
-#define LED_NONE 0x11
-#define LED_KEEP_ALIVE 200;
-
-// Software jumper to initiate firmware updates via built in bootloader
-#define UBOOT_SOFTJUMPER_ADDRESS	0x05
-#define UBOOT_SOFTJUMPER			0xd9
-
-
-typedef unsigned char  u08;
-typedef   signed char  s08;
-typedef unsigned short u16;
-typedef   signed short s16;
-
-
-// convenience macros (from Pascal Stangs avrlib)
-#ifndef BV
-	#define BV(bit)			(1<<(bit))
-#endif
-#ifndef cbi
-	#define cbi(reg,bit)	reg &= ~(BV(bit))
-#endif
-#ifndef sbi
-	#define sbi(reg,bit)	reg |= (BV(bit))
-#endif
 // ==============================================================================
 // Globals
 // ------------------------------------------------------------------------------
@@ -147,13 +110,7 @@ void sleepIfIdle()
 	}
 }
 
-// ==============================================================================
-// - hadAddressAssigned
-// ------------------------------------------------------------------------------
-// hook that gets called by the usb driver when we've got an usb address assigned
-// -> we're ready to work (or more precisely ready to go to sleep if our host sleeps)
-
-void hadAddressAssigned(void) {
+void hadAddressAssigned(void){
 	usb_state = usb_Idle;
 	PORTC = LED_GREEN;
 }
@@ -189,7 +146,6 @@ static void initForUsbConnectivity(void)
 {
 uchar   i = 0;
 
-    usbInit();
     /* enforce USB re-enumerate: */
     usbDeviceDisconnect();  /* do this while interrupts are disabled */
     while(--i){         /* fake USB disconnect for > 250 ms */
@@ -197,7 +153,7 @@ uchar   i = 0;
         _delay_ms(1);
     }
     usbDeviceConnect();
-    sei();
+    usbInit();
 }
 
 // ==============================================================================
@@ -212,7 +168,7 @@ void init(void)
 	MCUCSR &= ~(1 << PORF);
 				
 	// configure IO-Ports; most are unused, we set them to outputs to have defined voltages
-	DDRB = 0xFF;		// all unused except PB0 and 1 for USB; these are configured later
+    DDRB = ~USBMASK;    /* set all pins as outputs except USB */
 	DDRC = 0xFF;		// unused except PC0 and PC 4 for LEDS (outputs anyway...)
 	DDRD =  0xD3;		// unused except PD2 + 3 (INT0 + 1), PD1 (TX)
 						// and PD5 for Hardware Bootloader-Reset (pull to ground to force Bootloader)
@@ -230,9 +186,7 @@ void init(void)
 	// init timer0 for DMX timing
 	TCCR0 = 2; // prescaler 8 => 1 clock is 2/3 us
 		
-	// init usb
-    PORTB = 0;				// no pullups on USB pins
-	initForUsbConnectivity();	// enumerate device
+
 	
 	// init Timer 1  and Interrupt 1 for usb activity detection:
 	// - set INT1 to any edge (polled by sleepIfIdle())
@@ -249,6 +203,10 @@ void init(void)
 	TCCR1B = 3;
 	TCNT1 = 0;
 	sbi(TIFR, TOV1);
+
+	// init usb
+    PORTB = 0;				// no pullups on USB pins
+	initForUsbConnectivity();	// enumerate device
 	
 	sei();
 }
