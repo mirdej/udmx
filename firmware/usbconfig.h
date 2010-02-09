@@ -7,9 +7,11 @@
  * License: GNU GPL v2 (see License.txt) or proprietary (CommercialLicense.txt)
  * This Revision: $Id: usbconfig-prototype.h 532 2008-02-28 15:35:05Z cs $
  */
+#include "udmx.h"
 
 #ifndef __usbconfig_h_included__
 #define __usbconfig_h_included__
+
 
 /*
 General Description:
@@ -138,7 +140,8 @@ rename it to "usbconfig.h". Then edit it accordingly.
  * one parameter which distinguishes between the start of RESET state and its
  * end.
  */
-#define USB_SET_ADDRESS_HOOK()              hadAddressAssigned();
+#define USB_SET_ADDRESS_HOOK()       	hadAddressAssigned();
+
 /* This macro (if defined) is executed when a USB SET_ADDRESS request was
  * received.
  */
