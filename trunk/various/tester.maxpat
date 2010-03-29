@@ -31,6 +31,7 @@
 , 			{
 				"box" : 				{
 					"maxclass" : "message",
+					"text" : "\"Closed connection to www.anyma.ch/uDMX\"",
 					"numoutlets" : 1,
 					"id" : "obj-21",
 					"fontname" : "Arial",
