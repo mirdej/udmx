@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>8C28EAF911BD3615008085CB</string>
+						<string>8C28EB0211BD3C97008085CB</string>
 						<key>history</key>
 						<array>
 							<string>8CCFCC560F5EF62F005A7ACA</string>
@@ -560,9 +560,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>8C1609620F20DCC8002B5B41</string>
 		<string>8CCFCBC50F5EEDE6005A7ACA</string>
 		<string>/Users/me/Documents/development2010/udmx/maxmsp/udmx.xcodeproj</string>
-		<string>8C1609620F20DCC8002B5B41</string>
 	</array>
 	<key>WindowString</key>
 	<string>71 90 690 397 0 0 1440 878 </string>
@@ -581,6 +581,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -603,8 +605,6 @@
 							<string>214pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -655,7 +655,7 @@
 			<key>WindowToolGUID</key>
 			<string>8C1609620F20DCC8002B5B41</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

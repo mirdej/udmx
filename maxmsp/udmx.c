@@ -381,7 +381,7 @@ void uDMX_assist(t_uDMX *x, void *b, long m, long a, char *s) {
 		udmx_setup();
 	}
 #else				// compiling for MaxMSP
-	void main(void){
+	int main(void){
 		setup((t_messlist **)&uDMX_class, (method)uDMX_new, 0L, (short)sizeof(t_uDMX), 0L, A_DEFLONG, 0); 
 		// setup() loads our external into Max's memory so it can be used in a patch
 		// uDMX_new = object creation method defined below, A_DEFLONG = its (optional) argument is a long (32-bit) int 
@@ -397,7 +397,7 @@ void uDMX_assist(t_uDMX *x, void *b, long m, long a, char *s) {
 		addmess((method)uDMX_assist, "assist", A_CANT, 0); // (optional) assistance method needs to be declared like this
 		
 		//uDMX_message(x,gensym("uDMX version 2008-06-07 - (c) 2008 [ a n y m a ]"));	// post any important info to the max window when our object is laoded
-	
+		return 0;
 	}
 #endif				// Max/PD switch
 
