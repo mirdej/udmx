@@ -48,6 +48,8 @@ typedef struct _uDMX				// defines our object's internal variables for each inst
 	void			*msgOutlet;		//
 	int				dmx_buffer[512]; 
 	int				channel_changed_min,channel_changed_max;
+	char			serial_number[32];
+	char			bind_to[32];
 } t_uDMX;
 
 void *uDMX_class;					// global pointer to the object class - so max can reference the object 
@@ -59,6 +61,8 @@ void uDMX_in1(t_uDMX *x, long n);
 void uDMX_list(t_uDMX *x, t_symbol *s, short ac, t_atom *av);
 void uDMX_open(t_uDMX *x);
 void uDMX_close(t_uDMX *x);
+void uDMX_bind(t_uDMX *x, t_symbol *s);
+void uDMX_getSerial(t_uDMX *x);
 void uDMX_assist(t_uDMX *x, void *b, long m, long a, char *s);
 void *uDMX_new(long n);
 static int  usbGetStringAscii(usb_dev_handle *dev, int index, int langid, char *buf, int buflen);
@@ -287,6 +291,31 @@ void uDMX_open(t_uDMX *x){
 	} else find_device(x);
 }
 //----------------------------------------------------------------------------------------------------------------
+// establish connection with the udmx hardware by serial number
+void uDMX_bind(t_uDMX *x, t_symbol *s) {
+	if (x->dev_handle) { uDMX_close(x); }
+	
+	if (s == gensym("")) {
+		x->bind_to[0] = 0;
+	} else {
+		strcpy(x->bind_to,s->s_name);
+	}
+	
+	find_device(x);
+}
+
+//----------------------------------------------------------------------------------------------------------------
+// post serial number
+void uDMX_getSerial(t_uDMX *x){
+	if (x->dev_handle) {
+		post("uDMX serial number: %s\n", x->serial_number);
+	} else {
+		post("Not connected to an uDMX\n");
+	}
+
+}
+
+//----------------------------------------------------------------------------------------------------------------
 // close connection to hardware
 void uDMX_close(t_uDMX *x){
 #ifdef PUREDATA   	// compiling for PUREDATA 
@@ -341,8 +370,10 @@ void uDMX_assist(t_uDMX *x, void *b, long m, long a, char *s) {
 		class_addfloat(uDMX_class, (t_method)uDMX_int);			// the method for an int in the left inlet (inlet 0)
 		class_addlist(uDMX_class, (t_method)uDMX_list);
 		class_addmethod(uDMX_class, (t_method)uDMX_open, gensym("open"), 0);		
+		class_addmethod(uDMX_class, (t_method)uDMX_getSerial, gensym("get_serial"), 0);		
 		class_addmethod(uDMX_class, (t_method)uDMX_close, gensym("close"), 0);	
 		class_addmethod(uDMX_class, (t_method)uDMX_speedlim, gensym("speedlim"), A_FLOAT,0);	
+		class_addmethod(uDMX_class, (t_method)uDMX_bind, gensym("bind"), A_DEFSYM,0);	
 	
 	}
 	
@@ -359,6 +390,8 @@ void uDMX_assist(t_uDMX *x, void *b, long m, long a, char *s) {
 		addinx((method)uDMX_in1, 1);		// the method for an int in the right inlet (inlet 1)
 		addmess((method)uDMX_list,"list", A_GIMME, 0);
 		addmess((method)uDMX_open, "open", 0);		
+		addmess((method)uDMX_getSerial, "get_serial", 0);
+		addmess((method)uDMX_bind, "bind", A_DEFSYM,0);	
 		addmess((method)uDMX_close, "close", 0);	
 		addmess((method)uDMX_speedlim, "speedlim", A_LONG,0);	
 		addmess((method)uDMX_assist, "assist", A_CANT, 0); // (optional) assistance method needs to be declared like this
@@ -433,6 +466,8 @@ int     rval, i;
     buf[i-1] = 0;
     return i-1;
 }
+
+
 void find_device(t_uDMX *x) {
 
 	usb_dev_handle      *handle = NULL;
@@ -465,9 +500,27 @@ void find_device(t_uDMX *x) {
                     error("uDMX: warning: cannot query product for device: %s", usb_strerror());
                     goto skipDevice;
                 }
-                /* post("uDMX: seen product ->%s<-", string); */
-                if(strcmp(string, "uDMX") == 0)
+                // post("uDMX: seen product ->%s<-", string); 
+                if(strcmp(string, "uDMX") == 0) { 
+                	// we've found a udmx device. get serial number
+                
+					if	 (dev->descriptor.iSerialNumber) {
+						len = usb_get_string_simple(handle, dev->descriptor.iSerialNumber, x->serial_number, sizeof (x->serial_number));
+						if (len == 0) {
+							error("Unable to fetch serial number string");
+						}
+					}
+					 
+					//see if we're looking for a specific serial number
+				 	if (x->bind_to[0]) {
+				 		if (strcmp(x->bind_to,x->serial_number)) {
+							post("Found device for another serial number: %s\n", x->serial_number);	
+                   			goto skipDevice;
+				 		}
+				 	}
+				 	
                     break;
+				}
 skipDevice:
                 usb_close(handle);
                 handle = NULL;
