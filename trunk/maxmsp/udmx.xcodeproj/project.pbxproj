@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2FBBEADE08F335360078DB84 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54266BCE05E6E9780000000C /* MaxAPI.framework */; };
-		8CCFCC370F5EF0C3005A7ACA /* libusb.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CCFCC360F5EF0C3005A7ACA /* libusb.dylib */; };
+		8C28EAA011BD23CA008085CB /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C28EA9F11BD23CA008085CB /* MaxAPI.framework */; };
+		8C28EAD711BD242F008085CB /* libusb.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C28EAD611BD242F008085CB /* libusb.dylib */; };
 		F798054B0E0461CE00A84891 /* udmx.c in Sources */ = {isa = PBXBuildFile; fileRef = F798054A0E0461CE00A84891 /* udmx.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2FBBEAE508F335360078DB84 /* udmx.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = udmx.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
-		54266BCE05E6E9780000000C /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
-		8CCFCC360F5EF0C3005A7ACA /* libusb.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusb.dylib; path = ../../../gnusbMatrix64/sources/maxmsp/Contents/MacOS/libusb.dylib; sourceTree = SOURCE_ROOT; };
+		8C28EA9F11BD23CA008085CB /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../../development2009/lib-ext/frameworks/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
+		8C28EAD611BD242F008085CB /* libusb.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusb.dylib; path = "../../../development2009/lib-ext/libusb.dylib"; sourceTree = SOURCE_ROOT; };
 		F798054A0E0461CE00A84891 /* udmx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = udmx.c; sourceTree = "<group>"; };
 		F79969C10CE59D0C00BE1E3E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -25,8 +25,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FBBEADE08F335360078DB84 /* MaxAPI.framework in Frameworks */,
-				8CCFCC370F5EF0C3005A7ACA /* libusb.dylib in Frameworks */,
+				8C28EAA011BD23CA008085CB /* MaxAPI.framework in Frameworks */,
+				8C28EAD711BD242F008085CB /* libusb.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,8 +47,8 @@
 		089C1671FE841209C02AAC07 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				8CCFCC360F5EF0C3005A7ACA /* libusb.dylib */,
-				54266BCE05E6E9780000000C /* MaxAPI.framework */,
+				8C28EAD611BD242F008085CB /* libusb.dylib */,
+				8C28EA9F11BD23CA008085CB /* MaxAPI.framework */,
 			);
 			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
@@ -178,15 +178,15 @@
 				DEPLOYMENT_POSTPROCESSING = NO;
 				DSTROOT = "$(PROJECT_DIR)";
 				FRAMEWORK_SEARCH_PATHS = (
-					"../../c74support/max-includes",
-					"../../c74support/msp-includes",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../c74support/max-includes ../../c74support/msp-includes \"$(SRCROOT)/../../../development2009/lib-ext/frameworks\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "../../c74support/max-includes/macho-prefix.pch";
+				GCC_PREFIX_HEADER = "../../c74support/max-includes/macho-prefix.h";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../c74support/max-includes",
 					/Developer/Headers/FlatCarbon,
@@ -197,9 +197,11 @@
 					"$(inherited)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_3)",
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../../Documents/development2008/xDMX/maxmsp/Contents/MacOS\"";
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../../gnusbMatrix64/sources/maxmsp/Contents/MacOS\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_3 = "\"$(SRCROOT)/../../../development2009/lib-ext\"";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
@@ -230,12 +232,12 @@
 				DEPLOYMENT_POSTPROCESSING = NO;
 				DSTROOT = "$(PROJECT_DIR)";
 				FRAMEWORK_SEARCH_PATHS = (
-					"../../c74support/max-includes",
-					"../../c74support/msp-includes",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../c74support/max-includes ../../c74support/msp-includes \"$(SRCROOT)/../../../development2009/lib-ext/frameworks\"";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "../../c74support/max-includes/macho-prefix.pch";
+				GCC_PREFIX_HEADER = "../../c74support/max-includes/macho-prefix.h";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../c74support/max-includes",
 					/Developer/Headers/FlatCarbon,
@@ -246,9 +248,11 @@
 					"$(inherited)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_3)",
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../../Documents/development2008/xDMX/maxmsp/Contents/MacOS\"";
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../../gnusbMatrix64/sources/maxmsp/Contents/MacOS\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_3 = "\"$(SRCROOT)/../../../development2009/lib-ext\"";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
