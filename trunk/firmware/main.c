@@ -47,7 +47,7 @@ typedef   signed short s16;
 // ------------------------------------------------------------------------------
 
 // device serial number, formatted as YearMonthDayNCounter
-PROGMEM int usbDescriptorStringSerialNumber[] = {USB_STRING_DESCRIPTOR_HEADER(11),'1','0','0','2','0','9','N','0','0','5','0'};
+PROGMEM int usbDescriptorStringSerialNumber[] = {USB_STRING_DESCRIPTOR_HEADER(11),'1','1','0','4','2','6','N','0','0','6','5'};
 
 
 // ==============================================================================

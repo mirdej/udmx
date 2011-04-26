@@ -177,7 +177,7 @@ void *udmx_new(long n)		// n = int argument typed into object box (A_DEFLONG) --
 	
 	// create a second int inlet (leftmost inlet is automatic - all objects have one inlet by default)
 	// floatinlet_new(x, x->channel); //crashes on PD .... assigns float in inlet 2 directly to channel
-	//inlet_new(&x->p_ob, &x->p_ob.ob_pd, gensym("float"), gensym("ft1"));
+	inlet_new(&x->p_ob, &x->p_ob.ob_pd, gensym("float"), gensym("ft1"));
 
 	x->channel = 0;
 	x->debug_flag = 0;
