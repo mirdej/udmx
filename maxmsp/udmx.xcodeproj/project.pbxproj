@@ -13,7 +13,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2FBBEAE508F335360078DB84 /* udmx.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = udmx.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FBBEAE508F335360078DB84 /* xdmx.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = xdmx.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C28EA9F11BD23CA008085CB /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../../development2009/lib-ext/frameworks/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
 		8C28EAD611BD242F008085CB /* libusb.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusb.dylib; path = "../../../development2009/lib-ext/libusb.dylib"; sourceTree = SOURCE_ROOT; };
 		F798054A0E0461CE00A84891 /* udmx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = udmx.c; sourceTree = "<group>"; };
@@ -72,7 +72,7 @@
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FBBEAE508F335360078DB84 /* udmx.mxo */,
+				2FBBEAE508F335360078DB84 /* xdmx.mxo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,7 +106,7 @@
 			);
 			name = "max-external";
 			productName = attrtester;
-			productReference = 2FBBEAE508F335360078DB84 /* udmx.mxo */;
+			productReference = 2FBBEAE508F335360078DB84 /* xdmx.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -177,9 +177,7 @@
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = NO;
 				DSTROOT = "$(PROJECT_DIR)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../c74support/max-includes ../../c74support/msp-includes \"$(SRCROOT)/../../../development2009/lib-ext/frameworks\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -231,9 +229,7 @@
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = NO;
 				DSTROOT = "$(PROJECT_DIR)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../c74support/max-includes ../../c74support/msp-includes \"$(SRCROOT)/../../../development2009/lib-ext/frameworks\"";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
