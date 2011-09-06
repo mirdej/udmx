@@ -31,8 +31,11 @@
 #include <string.h>
 #include </usr/local/include/usb.h>    /* this is libusb, see http://libusb.sourceforge.net/ */
 
-#define USBDEV_SHARED_VENDOR    0x16C0  /* VOTI */
-#define USBDEV_SHARED_PRODUCT   0x05DC  /* Obdev's free shared PID */
+#define USBDEV_SHARED_VENDOR    	0x16C0  /* VOTI */
+#define USBDEV_SHARED_PRODUCT   	0x05DC  /* Obdev's free shared PID for Vendor-Type devices*/
+#define USBDEV_SHARED_PRODUCT_HID   0x05DF  /* Obdev's free shared PID for HID devices*/
+#define USBDEV_SHARED_PRODUCT_MIDI   0x05E4  /* Obdev's free shared PID for MIDI devices*/
+
 #define SPEED_LIMIT				10 		//  default transmission speed limit in ms
 
 typedef struct _uDMX				// defines our object's internal variables for each instance in a patch
@@ -467,6 +470,13 @@ int     rval, i;
     return i-1;
 }
 
+char isOurVIDandPID(struct usb_device const* dev) {
+	return dev->descriptor.idVendor == USBDEV_SHARED_VENDOR &&
+		(dev->descriptor.idProduct == USBDEV_SHARED_PRODUCT ||
+		 dev->descriptor.idProduct == USBDEV_SHARED_PRODUCT_HID ||
+		 dev->descriptor.idProduct == USBDEV_SHARED_PRODUCT_MIDI);
+}
+
 
 void find_device(t_uDMX *x) {
 
@@ -478,7 +488,7 @@ void find_device(t_uDMX *x) {
     usb_find_devices();
 	 for(bus=usb_busses; bus; bus=bus->next){
         for(dev=bus->devices; dev; dev=dev->next){
-            if(dev->descriptor.idVendor == USBDEV_SHARED_VENDOR && dev->descriptor.idProduct == USBDEV_SHARED_PRODUCT){
+            if(isOurVIDandPID(dev)){
                 char    string[256];
                 int     len;
                 handle = usb_open(dev); /* we need to open the device in order to query strings */

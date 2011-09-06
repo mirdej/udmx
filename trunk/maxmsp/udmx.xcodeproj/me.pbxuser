@@ -1,7 +1,6 @@
 // !$*UTF8*$!
 {
 	089C1669FE841209C02AAC07 /* Project object */ = {
-		activeArchitecture = i386;
 		activeBuildConfigurationName = Deployment;
 		activeTarget = 2FBBEAD608F335360078DB84 /* max-external */;
 		addToTargets = (
@@ -53,12 +52,14 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 297608091;
-			PBXWorkspaceStateSaveDate = 297608091;
+			PBXPerProjectTemplateStateSaveDate = 336999670;
+			PBXWorkspaceStateSaveDate = 336999670;
 		};
 		perUserProjectItems = {
-			8C28EB0211BD3C97008085CB /* PBXTextBookmark */ = 8C28EB0211BD3C97008085CB /* PBXTextBookmark */;
-			8CCFCC560F5EF62F005A7ACA /* PBXTextBookmark */ = 8CCFCC560F5EF62F005A7ACA /* PBXTextBookmark */;
+			8C28EB0211BD3C97008085CB = 8C28EB0211BD3C97008085CB /* PBXTextBookmark */;
+			8C9F372F141634F800AF0C03 /* PBXTextBookmark */ = 8C9F372F141634F800AF0C03 /* PBXTextBookmark */;
+			8C9F3768141635CC00AF0C03 /* PBXTextBookmark */ = 8C9F3768141635CC00AF0C03 /* PBXTextBookmark */;
+			8CCFCC560F5EF62F005A7ACA = 8CCFCC560F5EF62F005A7ACA /* PBXTextBookmark */;
 		};
 		sourceControlManager = 8C1609470F20DB8F002B5B41 /* Source Control */;
 		userBuildSettings = {
@@ -72,6 +73,9 @@
 		fallbackIsa = XCSourceControlManager;
 		isSCMEnabled = 0;
 		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
 		};
 	};
 	8C1609480F20DB8F002B5B41 /* Code sense */ = {
@@ -88,6 +92,26 @@
 		vrLen = 1228;
 		vrLoc = 1780;
 	};
+	8C9F372F141634F800AF0C03 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F798054A0E0461CE00A84891 /* udmx.c */;
+		name = "udmx.c: 550";
+		rLen = 0;
+		rLoc = 19032;
+		rType = 0;
+		vrLen = 1515;
+		vrLoc = 1779;
+	};
+	8C9F3768141635CC00AF0C03 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F798054A0E0461CE00A84891 /* udmx.c */;
+		name = "udmx.c: 560";
+		rLen = 0;
+		rLoc = 19449;
+		rType = 0;
+		vrLen = 1562;
+		vrLoc = 1890;
+	};
 	8CCFCC560F5EF62F005A7ACA /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = F798054A0E0461CE00A84891 /* udmx.c */;
@@ -100,9 +124,9 @@
 	};
 	F798054A0E0461CE00A84891 /* udmx.c */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {770, 7532}}";
-			sepNavSelRange = "{19032, 0}";
-			sepNavVisRange = "{1780, 1351}";
+			sepNavIntBoundsRect = "{{0, 0}, {901, 7059}}";
+			sepNavSelRange = "{19449, 0}";
+			sepNavVisRange = "{1890, 1562}";
 			sepNavWindowFrame = "{{639, 320}, {750, 558}}";
 		};
 	};
