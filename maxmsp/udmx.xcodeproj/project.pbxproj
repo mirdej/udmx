@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8C28EAA011BD23CA008085CB /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C28EA9F11BD23CA008085CB /* MaxAPI.framework */; };
 		8C28EAD711BD242F008085CB /* libusb.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C28EAD611BD242F008085CB /* libusb.dylib */; };
+		8C9F376E1416363600AF0C03 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C9F376D1416363600AF0C03 /* MaxAPI.framework */; };
 		F798054B0E0461CE00A84891 /* udmx.c in Sources */ = {isa = PBXBuildFile; fileRef = F798054A0E0461CE00A84891 /* udmx.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2FBBEAE508F335360078DB84 /* udmx.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = udmx.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C28EA9F11BD23CA008085CB /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../../development2009/lib-ext/frameworks/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
 		8C28EAD611BD242F008085CB /* libusb.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusb.dylib; path = "../../../development2009/lib-ext/libusb.dylib"; sourceTree = SOURCE_ROOT; };
+		8C9F376D1416363600AF0C03 /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = ../../frameworks/MaxAPI.framework; sourceTree = SOURCE_ROOT; };
 		F798054A0E0461CE00A84891 /* udmx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = udmx.c; sourceTree = "<group>"; };
 		F79969C10CE59D0C00BE1E3E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -25,8 +25,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C28EAA011BD23CA008085CB /* MaxAPI.framework in Frameworks */,
 				8C28EAD711BD242F008085CB /* libusb.dylib in Frameworks */,
+				8C9F376E1416363600AF0C03 /* MaxAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,8 +47,8 @@
 		089C1671FE841209C02AAC07 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				8C9F376D1416363600AF0C03 /* MaxAPI.framework */,
 				8C28EAD611BD242F008085CB /* libusb.dylib */,
-				8C28EA9F11BD23CA008085CB /* MaxAPI.framework */,
 			);
 			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
@@ -116,7 +116,14 @@
 			isa = PBXProject;
 			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "udmx" */;
 			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 089C166AFE841209C02AAC07 /* attrtester */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -177,9 +184,7 @@
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = NO;
 				DSTROOT = "$(PROJECT_DIR)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../../frameworks\"/**";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../c74support/max-includes ../../c74support/msp-includes \"$(SRCROOT)/../../../development2009/lib-ext/frameworks\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -206,7 +211,7 @@
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = xdmx;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = NO;
 				SYMROOT = build;
@@ -231,9 +236,7 @@
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = NO;
 				DSTROOT = "$(PROJECT_DIR)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../../frameworks\"/**";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../c74support/max-includes ../../c74support/msp-includes \"$(SRCROOT)/../../../development2009/lib-ext/frameworks\"";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -257,7 +260,7 @@
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = udmx;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = NO;
 				SYMROOT = build;
