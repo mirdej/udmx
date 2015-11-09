@@ -96,7 +96,7 @@ these macros are defined, the boot loader usees them.
 /* If this macro is defined to 1, the boot loader will exit shortly after the
  * programmer closes the connection to the device. Costs ~36 bytes.
  */
-#define SIGNATURE_BYTES             0x1e, 0x93, 0x07, 0     /* ATMega8 */
+//#define SIGNATURE_BYTES             0x1e, 0x93, 0x07, 0     /* ATMega8 */
 /* This macro defines the signature bytes returned by the emulated USBasp to
  * the programmer software. They should match the actual device at least in
  * memory size and features. If you don't define this, values for ATMega8,

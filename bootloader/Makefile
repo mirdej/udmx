@@ -15,7 +15,7 @@
 #     make lock    # to protect the boot loader from overwriting
 
 F_CPU = 12000000
-DEVICE = atmega8
+DEVICE = atmega88
 BOOTLOADER_ADDRESS = 1800
 
 PROGRAMMER = -c usbasp -P usb
@@ -75,8 +75,10 @@ CC = avr-gcc
 
 # Options:
 DEFINES = #-DDEBUG_LEVEL=2
-CFLAGS = -Wall -Os -I. -mmcu=$(DEVICE) -DF_CPU=$(F_CPU) $(DEFINES)
-LDFLAGS = -Wl,--section-start=.text=$(BOOTLOADER_ADDRESS)
+#CFLAGS = -Wall -Os -I. -mmcu=$(DEVICE) -DF_CPU=$(F_CPU) $(DEFINES)
+#LDFLAGS = -Wl,--section-start=.text=$(BOOTLOADER_ADDRESS)
+CFLAGS = -Wall -Os -fno-move-loop-invariants -fno-tree-scev-cprop -fno-inline-small-functions -I. -mmcu=$(DEVICE) -DF_CPU=$(F_CPU) $(DEFINES)
+LDFLAGS = -Wl,--relax,--gc-sections -Wl,--section-start=.text=$(BOOTLOADER_ADDRESS)
 
 OBJECTS =  usbdrv/usbdrvasm.o usbdrv/oddebug.o main.o
 
