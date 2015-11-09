@@ -321,8 +321,7 @@ void udmx_open(t_udmx *x){
 #else				// compiling for MaxMSP
         outlet_int(x->statusOutlet,1);
 #endif				// Max/PD switch
-    } else         qelem_set(x->m_qelem);
-
+    } else         find_device(x);
 }
 //----------------------------------------------------------------------------------------------------------------
 // establish connection with the udmx hardware by serial number
@@ -334,8 +333,8 @@ void udmx_bind(t_udmx *x, t_symbol *s) {
     } else {
         strcpy(x->bind_to,s->s_name);
     }
-    
-    qelem_set(x->m_qelem);
+    x->usb_devices_seen = -1;
+    find_device(x);
 }
 
 //----------------------------------------------------------------------------------------------------------------
@@ -371,6 +370,7 @@ void udmx_close(t_udmx *x){
     
     if (x->dev_handle) {
         usb_close(x->dev_handle);
+        x->usb_devices_seen = -1;
         x->dev_handle = NULL;
         udmx_message(x,gensym("Closed connection to www.anyma.ch/udmx"));
     } else
