@@ -3,21 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8C28EAD711BD242F008085CB /* libusb.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C28EAD611BD242F008085CB /* libusb.dylib */; };
-		8C9F376E1416363600AF0C03 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C9F376D1416363600AF0C03 /* MaxAPI.framework */; };
-		F798054B0E0461CE00A84891 /* udmx.c in Sources */ = {isa = PBXBuildFile; fileRef = F798054A0E0461CE00A84891 /* udmx.c */; };
+		22CF122B0EE9AAAD0054F513 /* udmx.c in Sources */ = {isa = PBXBuildFile; fileRef = 22CF122A0EE9AAAD0054F513 /* udmx.c */; };
+		8C268D541BEF34080082EF37 /* libusb-0.1.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C268D531BEF34080082EF37 /* libusb-0.1.4.dylib */; };
+		8C4A59441BF0870600EF84FA /* udmx.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8C4A59431BF0870600EF84FA /* udmx.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		22CF122A0EE9AAAD0054F513 /* udmx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = udmx.c; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* udmx.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = udmx.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C28EAD611BD242F008085CB /* libusb.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libusb.dylib; path = "../../../development2009/lib-ext/libusb.dylib"; sourceTree = SOURCE_ROOT; };
-		8C9F376D1416363600AF0C03 /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = ../../frameworks/MaxAPI.framework; sourceTree = SOURCE_ROOT; };
-		F798054A0E0461CE00A84891 /* udmx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = udmx.c; sourceTree = "<group>"; };
-		F79969C10CE59D0C00BE1E3E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C268D531BEF34080082EF37 /* libusb-0.1.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusb-0.1.4.dylib"; path = "../../../../../../../../../usr/local/lib/libusb-0.1.4.dylib"; sourceTree = "<group>"; };
+		8C4A59431BF0870600EF84FA /* udmx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = udmx.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -25,48 +24,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C28EAD711BD242F008085CB /* libusb.dylib in Frameworks */,
-				8C9F376E1416363600AF0C03 /* MaxAPI.framework in Frameworks */,
+				8C268D541BEF34080082EF37 /* libusb-0.1.4.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		089C166AFE841209C02AAC07 /* attrtester */ = {
+		089C166AFE841209C02AAC07 /* iterator */ = {
 			isa = PBXGroup;
 			children = (
-				08FB77ADFE841716C02AAC07 /* Source */,
-				089C167CFE841241C02AAC07 /* Resources */,
-				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
+				8C4A59431BF0870600EF84FA /* udmx.xcconfig */,
+				22CF122A0EE9AAAD0054F513 /* udmx.c */,
+				8C68B8D31BEE1FD400CFED3E /* External Frameworks and Libraries */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);
-			name = attrtester;
-			sourceTree = "<group>";
-		};
-		089C1671FE841209C02AAC07 /* External Frameworks and Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				8C9F376D1416363600AF0C03 /* MaxAPI.framework */,
-				8C28EAD611BD242F008085CB /* libusb.dylib */,
-			);
-			name = "External Frameworks and Libraries";
-			sourceTree = "<group>";
-		};
-		089C167CFE841241C02AAC07 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				F79969C10CE59D0C00BE1E3E /* Info.plist */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		08FB77ADFE841716C02AAC07 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				F798054A0E0461CE00A84891 /* udmx.c */,
-			);
-			name = Source;
+			name = iterator;
 			sourceTree = "<group>";
 		};
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
@@ -75,6 +48,15 @@
 				2FBBEAE508F335360078DB84 /* udmx.mxo */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8C68B8D31BEE1FD400CFED3E /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				8C268D531BEF34080082EF37 /* libusb-0.1.4.dylib */,
+			);
+			name = "External Frameworks and Libraries";
+			path = "../../../../projets_en_cours/PasGrandChose/maxmsp-build/gnusbs/pgcmachine/max_pd";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -105,7 +87,7 @@
 			dependencies = (
 			);
 			name = "max-external";
-			productName = attrtester;
+			productName = iterator;
 			productReference = 2FBBEAE508F335360078DB84 /* udmx.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
@@ -114,17 +96,17 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+			};
 			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "udmx" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
-				English,
-				Japanese,
-				French,
-				German,
+				en,
 			);
-			mainGroup = 089C166AFE841209C02AAC07 /* attrtester */;
+			mainGroup = 089C166AFE841209C02AAC07 /* iterator */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -138,6 +120,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C4A59441BF0870600EF84FA /* udmx.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,7 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F798054B0E0461CE00A84891 /* udmx.c in Sources */,
+				22CF122B0EE9AAAD0054F513 /* udmx.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,109 +151,65 @@
 		2FBBEAD008F335010078DB84 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"libusb-config",
+					"--libs",
+				);
+				HEADER_SEARCH_PATHS = (
+					"libusb-config",
+					"--libs",
+				);
+				LIBRARY_SEARCH_PATHS = "/usr/local/lib/**";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"libusb-config",
+					"--libs",
+				);
 			};
 			name = Development;
 		};
 		2FBBEAD108F335010078DB84 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"libusb-config",
+					"--libs",
+				);
+				HEADER_SEARCH_PATHS = (
+					"libusb-config",
+					"--libs",
+				);
+				LIBRARY_SEARCH_PATHS = "/usr/local/lib/**";
+				OTHER_LDFLAGS = (
+					"libusb-config",
+					"--libs",
+				);
 			};
 			name = Deployment;
 		};
 		2FBBEAE108F335360078DB84 /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C4A59431BF0870600EF84FA /* udmx.xcconfig */;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				DEPLOYMENT_LOCATION = YES;
-				DEPLOYMENT_POSTPROCESSING = NO;
-				DSTROOT = "$(PROJECT_DIR)";
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../../frameworks\"/**";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../c74support/max-includes ../../c74support/msp-includes \"$(SRCROOT)/../../../development2009/lib-ext/frameworks\"";
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "../../c74support/max-includes/macho-prefix.h";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../c74support/max-includes",
-					/Developer/Headers/FlatCarbon,
-				);
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "/../../sdk-build";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_3)",
-				);
-				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../../Documents/development2008/xDMX/maxmsp/Contents/MacOS\"";
-				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../../gnusbMatrix64/sources/maxmsp/Contents/MacOS\"";
-				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_3 = "\"$(SRCROOT)/../../../development2009/lib-ext\"";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = xdmx;
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
-				SECTORDER_FLAGS = "";
-				SKIP_INSTALL = NO;
-				SYMROOT = build;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = mxo;
-				ZERO_LINK = NO;
+				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cycling74.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = udmx;
 			};
 			name = Development;
 		};
 		2FBBEAE208F335360078DB84 /* Deployment */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C4A59431BF0870600EF84FA /* udmx.xcconfig */;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				DEPLOYMENT_LOCATION = YES;
-				DEPLOYMENT_POSTPROCESSING = NO;
-				DSTROOT = "$(PROJECT_DIR)";
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../../frameworks\"/**";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../c74support/max-includes ../../c74support/msp-includes \"$(SRCROOT)/../../../development2009/lib-ext/frameworks\"";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "../../c74support/max-includes/macho-prefix.h";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../c74support/max-includes",
-					/Developer/Headers/FlatCarbon,
-				);
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "/../../sdk-build";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_3)",
-				);
-				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../../Documents/development2008/xDMX/maxmsp/Contents/MacOS\"";
-				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../../gnusbMatrix64/sources/maxmsp/Contents/MacOS\"";
-				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_3 = "\"$(SRCROOT)/../../../development2009/lib-ext\"";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
+				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cycling74.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = udmx;
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
-				SECTORDER_FLAGS = "";
-				SKIP_INSTALL = NO;
-				SYMROOT = build;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = mxo;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
