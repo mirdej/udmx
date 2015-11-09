@@ -47,15 +47,16 @@ typedef struct _udmx				// defines our object's internal variables for each inst
     t_uint16		channel_changed_min,channel_changed_max;
     char			serial_number[32];
     char			bind_to[32];
+    t_uint8         correct_adressing;
 } t_udmx;
 
 static t_class *udmx_class; // global pointer to the object class - so max can reference the object
 
 // these are prototypes for the methods that are defined below
-void udmx_int(t_udmx *x, t_uint16 n);
+void udmx_int(t_udmx *x, t_int16 n);
 void udmx_float(t_udmx *x, double f);
 void udmx_speedlim(t_udmx *x, t_uint16 n);
-void udmx_in1(t_udmx *x, t_uint16 n);
+void udmx_in1(t_udmx *x, t_int16 n);
 void udmx_list(t_udmx *x, t_symbol *s, short ac, t_atom *av);
 void udmx_open(t_udmx *x);
 void udmx_close(t_udmx *x);
@@ -78,8 +79,9 @@ void udmx_message(t_udmx *x,t_symbol *message) {
 //----------------------------------------------------------------------------------------------------------------
 // Int in right inlet changes the channel address
 //----------------------------------------------------------------------------------------------------------------
-void udmx_in1(t_udmx *x, t_uint16 n){
-    // x = the instance of the object, n = the int received in the right inlet
+void udmx_in1(t_udmx *x, t_int16 n){
+
+    if(x->correct_adressing) n=n-1;
     if (n > 511) n=511;
     if (n < 0) n=0;
     x->channel = n;					// just store right operand value in instance's data structure and do nothing else
@@ -89,7 +91,7 @@ void udmx_in1(t_udmx *x, t_uint16 n){
 //
 // 				update dmx buffer, send immediately if we can
 //----------------------------------------------------------------------------------------------------------------
-void udmx_int(t_udmx *x, t_uint16 n){
+void udmx_int(t_udmx *x, t_int16 n){
     // x = the instance of the object; n = the int received in the left inlet
     
     if (n > 255) n=255;
@@ -339,10 +341,13 @@ void udmx_bind(t_udmx *x, t_symbol *s) {
 //----------------------------------------------------------------------------------------------------------------
 // post serial number
 void udmx_getSerial(t_udmx *x){
+
     if (x->dev_handle) {
-        post("udmx serial number: %s\n", x->serial_number);
+        t_atom argv[1];
+        atom_setsym(argv, gensym(x->serial_number));
+        outlet_anything(x->msgOutlet, gensym ("serial"), 1, argv);
     } else {
-        post("Not connected to an udmx\n");
+        outlet_anything(x->msgOutlet, gensym ("Not connected to an udmx"), 0, NULL);
     }
     
 }
@@ -440,21 +445,6 @@ void *udmx_new(t_symbol *s, long argc, t_atom *argv)	{
     t_int16 n;
     n = 0;
     
-    if (argc) {
-        ap = argv;
-        switch (atom_gettype(ap)) {
-            case A_LONG:
-                n = atom_getlong(ap);
-                if (n < 0) n = 0;
-                if (n > 511) n = 511;
-                break;
-        default:
-                break;
-        }
-
-    }
-    
-    
  
     // n = int argument typed into object box (A_DEFLONG) -- defaults to 0 if no args are typed
     
@@ -466,8 +456,33 @@ void *udmx_new(t_symbol *s, long argc, t_atom *argv)	{
     x->msgOutlet = outlet_new(x,0L);	//create right outlet
     x->statusOutlet = outlet_new(x,0L);	//create an outlet for connected flag
     
+    x->correct_adressing = 1;
     
-    
+    if (argc) {
+        ap = argv;
+        switch (atom_gettype(ap)) {
+            case A_LONG:
+                n = atom_getlong(ap);
+                break;
+            default:
+                break;
+        }
+        ap = &argv[argc-1];
+        
+        switch (atom_gettype(ap)) {
+            case A_LONG:
+                if (atom_getlong(ap) == 0 ) {
+                    x->correct_adressing = 0;
+                }
+                break;
+            default:
+                break;
+        }
+     }
+    if(x->correct_adressing) {n = n - 1;}
+    if (n < 0) n = 0;
+    if (n > 511) n = 511;
+
     x->channel = n;
     x->debug_flag = 0;
     x->channel_changed_min = 512;
@@ -476,6 +491,7 @@ void *udmx_new(t_symbol *s, long argc, t_atom *argv)	{
     x->dev_handle = NULL;
     x->speedlim = SPEED_LIMIT;
     x->usb_devices_seen = -1;
+
     
     clock_fdelay(x->m_clock,100);
     usb_init();
