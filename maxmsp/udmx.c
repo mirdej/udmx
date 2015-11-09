@@ -37,11 +37,13 @@ typedef struct _udmx				// defines our object's internal variables for each inst
     usb_dev_handle	*dev_handle;	// handle to the udmx converter
     t_uint8			debug_flag;
     void			*m_clock;		// handle to our clock
+    void *m_qelem;
     t_uint8			clock_running;	// is our clock running?
     t_uint16		speedlim;
     void 			*statusOutlet;		// our status outlet
     void			*msgOutlet;		//
     t_uint8			dmx_buffer[512];
+    t_int8			usb_devices_seen;
     t_uint16		channel_changed_min,channel_changed_max;
     char			serial_number[32];
     char			bind_to[32];
@@ -58,6 +60,7 @@ void udmx_list(t_udmx *x, t_symbol *s, short ac, t_atom *av);
 void udmx_open(t_udmx *x);
 void udmx_close(t_udmx *x);
 void udmx_bind(t_udmx *x, t_symbol *s);
+void udmx_tick(t_udmx *x);
 void udmx_getSerial(t_udmx *x);
 void udmx_blackout(t_udmx *x);
 void udmx_assist(t_udmx *x, void *b, t_uint16 m, t_uint16 a, char *s);
@@ -228,8 +231,11 @@ void udmx_send_single(t_udmx *x, t_uint16 chann) {
     
     t_uint16 nBytes;
     
-    if (!(x->dev_handle)) find_device(x);
-    else {
+    if (!(x->dev_handle)) {
+        if (chann < x->channel_changed_min) x->channel_changed_min = chann;
+         if (chann > x->channel_changed_max)x->channel_changed_max = chann;
+          udmx_tick(x);
+    } else {
         nBytes = usb_control_msg(x->dev_handle, USB_TYPE_VENDOR | USB_RECIP_DEVICE | USB_ENDPOINT_OUT,
                                  cmd_SetSingleChannel, x->dmx_buffer[chann], chann, NULL, 0, 200);
         if(nBytes < 0)
@@ -243,7 +249,7 @@ void udmx_send_single(t_udmx *x, t_uint16 chann) {
 //----------------------------------------------------------------------------------------------------------------
 void udmx_send_range(t_udmx *x, t_uint16 from, t_uint16 to) {
     
-    if (!(x->dev_handle)) find_device(x);
+    if (!(x->dev_handle)) udmx_tick(x);
     else {
         t_uint16 i,len,nBytes;
         from = MIN(MAX(from,0),510);
@@ -273,7 +279,13 @@ void udmx_send_range(t_udmx *x, t_uint16 from, t_uint16 to) {
 //----------------------------------------------------------------------------------------------------------------
 // clock tick
 void udmx_tick(t_udmx *x) {
-    
+
+    if (!(x->dev_handle)) {
+        qelem_set(x->m_qelem);
+      //  clock_fdelay(x->m_clock,4000); //check again periodically
+        return;
+    }
+
     if (x->channel_changed_min < 512) { // there was a change since we last sent something
         
         if (x->channel_changed_max - x->channel_changed_min) {
@@ -307,7 +319,8 @@ void udmx_open(t_udmx *x){
 #else				// compiling for MaxMSP
         outlet_int(x->statusOutlet,1);
 #endif				// Max/PD switch
-    } else find_device(x);
+    } else         qelem_set(x->m_qelem);
+
 }
 //----------------------------------------------------------------------------------------------------------------
 // establish connection with the udmx hardware by serial number
@@ -320,7 +333,7 @@ void udmx_bind(t_udmx *x, t_symbol *s) {
         strcpy(x->bind_to,s->s_name);
     }
     
-    find_device(x);
+    qelem_set(x->m_qelem);
 }
 
 //----------------------------------------------------------------------------------------------------------------
@@ -448,6 +461,8 @@ void *udmx_new(t_symbol *s, long argc, t_atom *argv)	{
     t_udmx *x = (t_udmx *)object_alloc(udmx_class);
     intin(x,1);					// create a second int inlet (leftmost inlet is automatic - all objects have one inlet by default)
     x->m_clock = clock_new(x,(method)udmx_tick); 	// make new clock for polling and attach tick function to it
+    x->m_qelem = qelem_new((t_object *)x, (method)find_device);
+    
     x->msgOutlet = outlet_new(x,0L);	//create right outlet
     x->statusOutlet = outlet_new(x,0L);	//create an outlet for connected flag
     
@@ -460,8 +475,9 @@ void *udmx_new(t_symbol *s, long argc, t_atom *argv)	{
     x->clock_running = 0;
     x->dev_handle = NULL;
     x->speedlim = SPEED_LIMIT;
+    x->usb_devices_seen = -1;
     
-    udmx_message(x,gensym("."));
+    clock_fdelay(x->m_clock,100);
     usb_init();
     
     return(x);					// return a reference to the object instance
@@ -469,6 +485,8 @@ void *udmx_new(t_symbol *s, long argc, t_atom *argv)	{
 //----------------------------------------------------------------------------------------------------------------
 // object destruction
 void udmx_free(t_udmx *x){
+    object_free(x->m_clock);
+    qelem_free(x->m_qelem);
     if (x->dev_handle)
         udmx_close(x);
 }
@@ -507,13 +525,19 @@ char isOurVIDandPID(struct usb_device const* dev) {
 
 
 void find_device(t_udmx *x) {
-    
     usb_dev_handle      *handle = NULL;
     struct usb_bus      *bus;
     struct usb_device   *dev;
     
+    t_int16 device_count;
+    
     usb_find_busses();
-    usb_find_devices();
+    device_count = usb_find_devices();
+    if (device_count == x->usb_devices_seen) {
+        return;
+    }
+    x->usb_devices_seen = device_count;
+    
     for(bus=usb_busses; bus; bus=bus->next){
         for(dev=bus->devices; dev; dev=dev->next){
             if(isOurVIDandPID(dev)){
