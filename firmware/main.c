@@ -501,7 +501,7 @@ void usbFunctionWriteOut(uchar * data, uchar len)
 		
 		switch (msg->byte[0]) {
 			case 0xB0: {				// control change
-				u08 chan_no = msg->byte[1];
+				u08 chan_no = msg->byte[1]-1;
 				if (chan_no < 120) {	// controllers 120..127 are reserved for channel mode msg
 					dmx_data[chan_no] = msg->byte[2] << 1;
 					if (chan_no > packet_len) packet_len = chan_no;
@@ -510,14 +510,14 @@ void usbFunctionWriteOut(uchar * data, uchar len)
 				break;
 			}
 			case 0x90: {				// note on
-				u08 chan_no = msg->byte[1];
+				u08 chan_no = msg->byte[1]-1;
 				dmx_data[chan_no] = msg->byte[2] << 1;
 				if (chan_no > packet_len) packet_len = chan_no;
 				if(dmx_state == dmx_Off) dmx_state = dmx_NewPacket;
 				break;
 			}
 			case 0x80: {				// note off
-				u08 chan_no = msg->byte[1];		
+				u08 chan_no = msg->byte[1]-1;		
 				dmx_data[chan_no] = 0;
 				break;
 			}

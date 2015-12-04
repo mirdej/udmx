@@ -15,7 +15,7 @@
 #     make lock    # to protect the boot loader from overwriting
 
 F_CPU = 12000000
-DEVICE = atmega88
+DEVICE = atmega8
 BOOTLOADER_ADDRESS = 1800
 
 PROGRAMMER = -c usbasp -P usb
@@ -104,7 +104,7 @@ flash:	all
 readflash:
 	$(AVRDUDE) -U flash:r:read.hex:i
 
-fuse:
+
 fuse:
 	$(AVRDUDE) -U hfuse:w:0xc8:m -U lfuse:w:0xef:m
 
