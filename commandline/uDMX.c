@@ -125,8 +125,8 @@ int                 nBytes;
         fprintf(stderr, "Could not find USB device \"uDMX\" with vid=0x%x pid=0x%x\n", USBDEV_SHARED_VENDOR, USBDEV_SHARED_PRODUCT);
         exit(1);
     }
-	if(argc < 3 && argc > 1){
-		if (strcmp(argv[1], "-bootloader") == 0) {
+	if(argc < 3){
+		if (argc == 2 && strcmp(argv[1], "-bootloader") == 0) {
 			nBytes = usb_control_msg(handle, USB_TYPE_VENDOR | USB_RECIP_DEVICE | USB_ENDPOINT_IN,
 									cmd_StartBootloader, 0, 0, buffer, sizeof(buffer), 5000);
 			printf("Starting bootloader...\nPlease use the ./uboot utility to update firmware.");						
