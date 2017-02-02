@@ -15,7 +15,7 @@
 
 #include "m_pd.h"
 
-#include "../common/udmx_cmds.h"
+#include "../common/uDMX_cmds.h"
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>

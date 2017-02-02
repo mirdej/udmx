@@ -22,12 +22,12 @@ obtained from http://libusb.sourceforge.net/.
 #include <usb.h>    /* this is libusb, see http://libusb.sourceforge.net/ */
 
 #define USBDEV_SHARED_VENDOR    0x16C0  /* VOTI */
-#define USBDEV_SHARED_PRODUCT   0x05DC  /* Obdev's free shared PID */
+#define USBDEV_SHARED_PRODUCT   0x05E4  /* Obdev's free shared PID */
 /* Use obdev's generic shared VID/PID pair and follow the rules outlined
  * in firmware/usbdrv/USBID-License.txt.
  */
 
-#include "../uDMX_cmds.h"
+#include "../common/uDMX_cmds.h"
 
 static void usage(char *name)
 {
@@ -126,7 +126,7 @@ int                 nBytes;
         exit(1);
     }
 	if(argc < 3){
-		if (strcmp(argv[1], "-bootloader") == 0) {
+		if (argc == 2 && strcmp(argv[1], "-bootloader") == 0) {
 			nBytes = usb_control_msg(handle, USB_TYPE_VENDOR | USB_RECIP_DEVICE | USB_ENDPOINT_IN,
 									cmd_StartBootloader, 0, 0, buffer, sizeof(buffer), 5000);
 			printf("Starting bootloader...\nPlease use the ./uboot utility to update firmware.");						
