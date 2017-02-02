@@ -27,7 +27,7 @@ obtained from http://libusb.sourceforge.net/.
  * in firmware/usbdrv/USBID-License.txt.
  */
 
-#include "../uDMX_cmds.h"
+#include "../common/uDMX_cmds.h"
 
 static void usage(char *name)
 {
@@ -126,7 +126,7 @@ int                 nBytes;
         exit(1);
     }
 	if(argc < 3){
-		if (strcmp(argv[1], "-bootloader") == 0) {
+		if (argc == 2 && strcmp(argv[1], "-bootloader") == 0) {
 			nBytes = usb_control_msg(handle, USB_TYPE_VENDOR | USB_RECIP_DEVICE | USB_ENDPOINT_IN,
 									cmd_StartBootloader, 0, 0, buffer, sizeof(buffer), 5000);
 			printf("Starting bootloader...\nPlease use the ./uboot utility to update firmware.");						
