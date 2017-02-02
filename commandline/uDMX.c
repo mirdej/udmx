@@ -22,7 +22,7 @@ obtained from http://libusb.sourceforge.net/.
 #include <usb.h>    /* this is libusb, see http://libusb.sourceforge.net/ */
 
 #define USBDEV_SHARED_VENDOR    0x16C0  /* VOTI */
-#define USBDEV_SHARED_PRODUCT   0x05DC  /* Obdev's free shared PID */
+#define USBDEV_SHARED_PRODUCT   0x05E4  /* Obdev's free shared PID */
 /* Use obdev's generic shared VID/PID pair and follow the rules outlined
  * in firmware/usbdrv/USBID-License.txt.
  */
