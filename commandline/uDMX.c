@@ -132,6 +132,7 @@ int                 nBytes;
 			printf("Starting bootloader...\nPlease use the ./uboot utility to update firmware.");						
 
 		} else {
+			usb_close(handle);
 			usage(argv[0]);
 	        exit(1);
 	    }
